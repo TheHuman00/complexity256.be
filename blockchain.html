@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Bitcoin: A Peer-to-Peer Electronic Cash System - Satoshi Nakamoto</title>
+  </head>
+  <body>
+	<div>
+		<button onclick="window.location.href='index.html'">Return</button> - Whitepaper directly from the blockchain on this TxID : <a style="text-decoration:none;" target="_blank" href="https://www.blockchain.com/explorer/transactions/btc/54e48e5f5c656b26c3bca14a8c95aa583d07ebe84dde3b7dd4a78f4e4186e713"><em>54e48e5f5c656b26c3bca14a8c95aa583d07ebe84dde3b7dd4a78f4e4186e713</em></a><br>
+		<strong>BE CAREFUL</strong> I read the transaction with this intermediary : <a style="text-decoration:none;" target="_blank" href="https://www.blockchain.com/">blockchain.com</a>
+		<div>
+			<object id="whitePaper" style="position: absolute; height: 100%; width: 100%;"></object>
+		</div>
+	</div>
+
+	<script src="./assets/js/jquery.min.js"></script>
+	<script>
+		function hexToBase64(hexstring) {
+		    return btoa(hexstring.match(/\w{2}/g).map(function(a) {
+		        return String.fromCharCode(parseInt(a, 16));
+		    }).join(""));
+		}
+		$(function() {
+			var pdf = "";
+			$.get( "https://blockchain.info/rawtx/54e48e5f5c656b26c3bca14a8c95aa583d07ebe84dde3b7dd4a78f4e4186e713?cors=true", function( data ) {
+				data.out.forEach(function(output,num){
+					var len = output.script.length;
+					if (num >= data.out.length-2) return;
+
+					var tmp = "";
+					var cur = 4;
+
+					tmp += output.script.substr(cur,130);
+					cur += 132
+					tmp += output.script.substr(cur,130);
+					cur += 132
+					tmp += output.script.substr(cur,130);
+
+					var out = hexToBase64(tmp);
+					if (num === 0){
+						out = atob(out.substr(8)).substr(2);
+					}else if (num == data.out.length-3){
+						out = atob(out.substr(0,out.length-14))
+					}else{
+						out = atob(out);
+					}
+
+					pdf += out;
+				});
+
+				whitePaper.data = "data:application/pdf;base64," + btoa(pdf);
+			});
+		});
+	</script>
+  </body>
+</html>
