@@ -15,5 +15,4 @@ git clone https://github.com/TheHuman00/complexity256-web.git
 ## Authors
 
 - [@Thehuman00](https://github.com/TheHuman00)
-- [https://nakamotoinstitute.org/](https://nakamotoinstitute.org/) (for the html whitepaper)
-
+- [@PanJarda](https://github.com/PanJarda/bitcoin_whitepaper) (for the css and svg)
