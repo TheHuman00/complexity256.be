@@ -7,7 +7,7 @@ An adaptation of Bitcoin's WhitePaper in HTML with reproduction of diagrams in S
 
 ## Installation
 ```bash  
-git clone https://github.com/TheHuman00/complexity256-web/blob/master/index.html
+git clone https://github.com/TheHuman00/complexity256-web.git
 ```
 
 
